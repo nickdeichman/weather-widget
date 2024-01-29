@@ -1,13 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import ForecastForm from '../CityForm/ForecastForm'
+import React from 'react';
+import CityForm from '../CityForm/CityForm';
+import ForecastWindow from '../ForecastWindow/ForecastWindow';
+import useForecast from '../../hooks/useForecast';
 
 const App = () => {
-  const {forecast} = useSelector(state => state.forecast)
+ const {isDataConfirmed} = useForecast();
 
-  return (
-    <ForecastForm/>
-  )
-}
+  return isDataConfirmed ? <ForecastWindow /> : <CityForm />;
+};
 
-export default App
+export default App;

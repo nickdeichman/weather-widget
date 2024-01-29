@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { BASE_URL, API_KEY } from '../constants/openWeatherConstants';
+import { OPENWEATHER_BASE_URL } from '../constants/constants';
+const API_KEY =  import.meta.env.VITE_OPENWEATHER_API_KEY
 
 const forecast = {
   get: (lat, lon, metricSystem) =>
     axios
-      .get(BASE_URL + `lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${metricSystem}`)
+      .get(OPENWEATHER_BASE_URL + `lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${metricSystem}`)
       .then(({ data }) => data),
 };
 

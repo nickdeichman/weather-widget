@@ -4,10 +4,10 @@ import { CELSIUS, IMPERIAL } from '../../../constants/constants';
 import { useDispatch } from 'react-redux';
 import { setMetricSystem } from '../../../redux/store/reducers/forecastSlice';
 
-const ForecastSelect = () => {
+const MetricSystemSelect = () => {
   const dispatch = useDispatch();
   const handleSelect = (e) => {
-    dispatch(setMetricSystem(e.target.value));
+    dispatch(setMetricSystem(e.target.value.toLowerCase()));
   };
 
   return (
@@ -18,4 +18,4 @@ const ForecastSelect = () => {
   );
 };
 
-export default ForecastSelect;
+export default MetricSystemSelect;
