@@ -5,6 +5,13 @@ const OPENWEATHER_ICON_URL = `https://openweathermap.org/img/wn/`;
 const CELSIUS_SYMBOL = `°C`;
 const FAHRENHEIT_SYMBOL = `°F`;
 
+const REQUIRED_DATA = {
+  name: 'City',
+  temperature: 'Temperature',
+  feels_like : 'Feels like',
+  // weather: 'Weather',
+}
+
 export {
   CELSIUS,
   IMPERIAL,
@@ -12,4 +19,5 @@ export {
   OPENWEATHER_ICON_URL,
   CELSIUS_SYMBOL,
   FAHRENHEIT_SYMBOL,
+  REQUIRED_DATA
 };

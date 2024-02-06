@@ -9,6 +9,13 @@ const thunks = {
       return response;
     }
   ),
+  getForecastById: createAsyncThunk(
+    'forecast/getForecastById',
+    async ({ id, units }) => {
+      const response = await service.getById(id, units);
+      return response;
+    }
+  ),
 };
 
 export default thunks;

@@ -2,19 +2,21 @@ import { Button, TextField } from '@mui/material';
 import MetricSystemSelect from './MetricSystemSelect/MetricSystemSelect';
 import './cityForm.scss';
 import useCityForm from '../../hooks/useCityForm';
+import { useNavigate } from 'react-router';
 
 const CityForm = () => {
-  const { lat, lon, materialRef, submitData } = useCityForm();
+  const { lat, materialRef, submitData } = useCityForm();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    lat && lon ? submitData() : null;
+    lat && submitData();
   };
 
   return (
     <form onSubmit={(e) => handleSubmit(e)} className='city-data__form'>
       <TextField required inputRef={materialRef} />
       <MetricSystemSelect />
-      <Button type='submit'>Confirm city</Button>
+      <Button variant='contained' className='city-data__btn-submit' type='submit'>Confirm city</Button>
     </form>
   );
 };

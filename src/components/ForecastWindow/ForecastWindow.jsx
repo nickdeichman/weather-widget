@@ -1,59 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  CELSIUS_SYMBOL,
-  FAHRENHEIT_SYMBOL,
-  CELSIUS,
-} from '../../constants/constants';
-import { resetCity } from '../../redux/store/forecast/slice';
-import { Button } from '@mui/base';
-import service from '../../service/forecastService';
+import React from 'react';
+import useForecastWindow from '../../hooks/useForecastWindow';
+import ForeCastLoading from '../ForeCastLoading/ForeCastLoading';
+import { Button } from '@mui/material';
+import { REQUIRED_DATA } from '../../constants/constants';
+import ForecastWindowListItem from './ForecastWindowListItem/ForecastWindowListItem';
 
 const ForecastWindow = () => {
-  const dispatch = useDispatch();
-  const { forecast, metricSystem } = useSelector((state) => state.forecast);
-  const [icon, setIcon] = useState();
-  const [bigIcon, setBigIcon] = useState();
-  const metricSymbol =
-    metricSystem.toLowerCase() === CELSIUS.toLowerCase()
-      ? CELSIUS_SYMBOL
-      : FAHRENHEIT_SYMBOL;
+  const { forecast, icon, bigIcon, metricSymbol, backToCityForm } =
+    useForecastWindow();
 
-  useEffect(() => {
-    forecast.icon
-      ? (async () => {
-          const iconResponse = await service.getWeatherIcon(forecast.icon);
-          const bigIconResponse = await service.getBigWeatherIcon(forecast.icon);
-          setIcon(iconResponse);
-          setBigIcon(bigIconResponse)
-        })()
-      : null;
-  }, [forecast]);
   const handleClick = () => {
-    dispatch(resetCity());
+    backToCityForm();
   };
 
   return (
     <div className='forecast-window'>
-      <ul>
-        {Object.keys(forecast).length ? (
-          <>
-            <li>City: {forecast.name}</li>
-            <li>
-              Temperature:{' '}
-              {forecast.temperature.toFixed(0) + ` ${metricSymbol}`}
+      {forecast ? (
+        <>
+          <ul className='forecast-window__list'>
+            {Object.keys(forecast).map((key) => {
+              return REQUIRED_DATA[key] ? (
+                <ForecastWindowListItem
+                  className='forecast-window__list-item'
+                  key={key}
+                  description={REQUIRED_DATA[key]}
+                  metricSymbol={metricSymbol}
+                  value={forecast[key]}
+                  imgSrc={icon}
+                />
+              ) : null;
+            })}
+            <li className='forecast-window__list-item'>
+              Weather: {forecast.weather + ` `}
+              <img className='forecast-window__icon-small' src={icon} alt='' />
             </li>
-            <li>
-              Feels like:{' '}
-              {forecast['feels_like'].toFixed(0) + ` ${metricSymbol}`}
-            </li>
-            <li>Weather: {forecast['weather']}</li>
-          </>
-        ) : null}
-      </ul>
-      <img src={icon} alt='' />
-      <img src={bigIcon} alt='' />
-      <Button onClick={() => handleClick()}>Select another city</Button>
+          </ul>
+          <Button
+            className='forecast-window__btn-back'
+            variant='contained'
+            onClick={handleClick}
+          >
+            Select another city
+          </Button>
+        </>
+      ) : (
+        <ForeCastLoading />
+      )}
     </div>
   );
 };
