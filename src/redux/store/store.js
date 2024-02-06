@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import forecastReducer from './reducers/forecastSlice'
+import forecastReducer from './forecast/slice'
 
 export default configureStore({
   reducer: {

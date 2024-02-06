@@ -1,13 +1,12 @@
 import { MenuItem, Select } from '@mui/material';
 import React from 'react';
 import { CELSIUS, IMPERIAL } from '../../../constants/constants';
-import { useDispatch } from 'react-redux';
-import { setMetricSystem } from '../../../redux/store/reducers/forecastSlice';
+import useCityForm from '../../../hooks/useCityForm';
 
 const MetricSystemSelect = () => {
-  const dispatch = useDispatch();
+  const { changeMetricSystem } = useCityForm();
   const handleSelect = (e) => {
-    dispatch(setMetricSystem(e.target.value.toLowerCase()));
+    changeMetricSystem(e.target.value.toLowerCase());
   };
 
   return (

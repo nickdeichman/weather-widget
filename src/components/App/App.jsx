@@ -4,9 +4,9 @@ import ForecastWindow from '../ForecastWindow/ForecastWindow';
 import useForecast from '../../hooks/useForecast';
 
 const App = () => {
- const {isDataConfirmed} = useForecast();
+ const {forecast} = useForecast();
 
-  return isDataConfirmed ? <ForecastWindow /> : <CityForm />;
+  return forecast ? <ForecastWindow /> : <CityForm />;
 };
 
 export default App;
