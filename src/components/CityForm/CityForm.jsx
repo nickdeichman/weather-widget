@@ -1,6 +1,5 @@
 import { Button, TextField } from '@mui/material';
 import MetricSystemSelect from './MetricSystemSelect/MetricSystemSelect';
-import './cityForm.scss';
 import useCityForm from '../../hooks/useCityForm';
 import { useNavigate } from 'react-router';
 

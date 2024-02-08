@@ -31,6 +31,15 @@ $green-color-hover: #19c931;
   box-sizing: border-box;
 }
 
+
+body {
+  background-color: #eee;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 #root {
   .weather-container {
     display: flex;
@@ -75,11 +84,10 @@ $green-color-hover: #19c931;
 .city-data__form {
   @include block;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  // justify-content: center;
+  padding: 2rem;
   gap: 1rem;
-  width: 50%;
-  height: 20rem;
   margin: 0 auto;
   border: 2px solid black;
   .city-data__btn-submit {
